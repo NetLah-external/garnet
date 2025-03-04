@@ -1,0 +1,48 @@
+<Project>
+
+  <PropertyGroup>
+  <PackageTags>NetLah dotnet Garnet key-value store cache dictionary hashtable concurrent persistent remote cluster Redis RESP</PackageTags>
+    <Authors>thoho;NetLah</Authors>
+    <Company>NetLah</Company>
+    <Copyright>NetLah</Copyright>
+    <Product>NetLah .NET</Product>
+
+    <!--PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance-->
+
+    <!--PackageIcon>icon.png</PackageIcon-->
+    <PackageProjectUrl>https://github.com/NetLah/spaservices-hosting</PackageProjectUrl>
+    <PackageReleaseNotes>https://github.com/NetLah/spaservices-hosting/releases</PackageReleaseNotes>
+
+        <Description>
+      Windows Service for Garnet. Garnet is a remote cache-store from Microsoft Research, that offers strong performance (throughput and latency),
+      scalability, storage, recovery, cluster sharding, key migration, and replication features. Garnet uses the Redis RESP wire
+      protocol and can work with existing Redis clients.
+    </Description>
+
+    <!-- Publish the repository URL in the built .nupkg (in the NuSpec <Repository> element) -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+
+    <!-- Embed source files that are not tracked by the source control manager in the PDB -->
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+
+    <LangVersion>12.0</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+	<!-- Versioning property for builds and packages -->
+  <Import Project="Version.props" />
+  
+  <PropertyGroup Condition=" '$(TEAMCITY_VERSION)' != '' OR '$(CI)' == 'true' OR '$(TF_BUILD)' == 'true' OR '$(GITHUB_ACTIONS)' == 'true'">
+    <!-- Recommended: Embed symbols containing Source Link in the main file (exe/dll) -->
+    <DebugType>embedded</DebugType>
+
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <ContinuousIntegrationBuild>True</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(TEAMCITY_VERSION)' != '' OR '$(CI)' == 'true' OR '$(TF_BUILD)' == 'true' OR '$(GITHUB_ACTIONS)' == 'true'">
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
+  </ItemGroup>
+
+</Project>
